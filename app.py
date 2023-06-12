@@ -2,20 +2,24 @@ import gi
 from gi.repository import Gtk
 gi.require_version('Gtk', '3.0')
 import requests
+import os
 
 def on_b_baixar_clicked(button):
     entrada = builder.get_object("texto_url")
-    url = 'https://' + entrada.get_text()
+    url = entrada.get_text()
+    
+    if not url.startswith("http://") and not url.startswith("https://"):
+        url = f'http://{url}' 
     
     response = requests.get(url)
-
     # Verificar se a solicitação foi bem-sucedida (código de status 200 indica sucesso)
     if response.status_code == 200:
         # Caminho de destino onde a imagem será salva
         path = "./images/"
+        if not os.path.exists(path):
+            os.makedirs(path)
 
-        # Salvar o conteúdo da resposta no arquivo
-        with open(path, "wb") as file:
+        with open(os.path.join(path, "wallpaper.png"), "wb") as file:
             file.write(response.content)
 
         print("Imagem baixada com sucesso.")
