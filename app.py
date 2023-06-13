@@ -10,10 +10,10 @@ import subprocess
 caminho = ''
 nomeArq = ''
 url = ''
-# usando os dois separados pra poder juntar os dois e formar um diretorio valido independente
-# de ser windows ou linux
+# usando os dois separados pra poder juntar os dois e formar um diretorio valido 
+
 listaTipos = ['png', 'jpeg', 'jpg', 'svg', 'gif', 'bmp']
-suportados = ['windows', 'kde', 'cinnamon', 'gnome', 'mate']
+suportados = ['kde', 'cinnamon', 'gnome', 'mate']
 
 def limpa():
     
@@ -24,17 +24,17 @@ def limpa():
 
 def notificaSucesso(caminho):
 
-    os.system(f"notify-send -i info 'Concluído' 'Salvo em {caminho}'")
-    os.system("paplay ./audio/downloadConcluido.ogg")
+    os.system(f"notify-send -i info 'Concluído' 'Salvo em '{os.path.abspath(caminho)}'.'")
+    os.system("paplay ./assets/audios/downloadConcluido.ogg")
 
 def notificaFalha(falha):
 
     os.system(f"notify-send -i error 'Erro' '{falha}'")
-    os.system("paplay ./audio/falha.ogg")
+    os.system("paplay ./assets/audios/falha.ogg")
 
 def notificaTroca():
-    os.system(f"notify-send -i info 'Sucesso' 'Seu wallpaper novo já está pronto'")
-    os.system("paplay ./audio/wallpaperModificado.ogg")
+    os.system(f"notify-send -i info 'Sucesso' 'Seu wallpaper novo já está pronto!'")
+    os.system("paplay ./assets/audios/wallpaperModificado.ogg")
 
 def on_b_baixar_clicked(button):
 
@@ -44,7 +44,6 @@ def on_b_baixar_clicked(button):
     global url
     
     limpa()
-
 
     entrada = builder.get_object("texto_url")
     url = entrada.get_text()
@@ -130,11 +129,11 @@ def on_b_sobre_clicked(button):
     imagem.set_from_file(os.path.join('assets', 'triforce.svg'))
     pixbuf = imagem.get_pixbuf().scale_simple(50, 50, GdkPixbuf.InterpType.BILINEAR)
     imagem.set_from_pixbuf(pixbuf)    
+    
     # Calcula as coordenadas para centralizar a imagem
     x = (300 - 50) / 2
     y = (200 - 50) / 2
     
-    # Posiciona a imagem no Gtk.Fixed
     box.pack_start(imagem, True, True, 0)
     
     label = Gtk.Label()
