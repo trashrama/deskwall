@@ -13,7 +13,7 @@ url = ''
 # usando os dois separados pra poder juntar os dois e formar um diretorio valido 
 
 listaTipos = ['png', 'jpeg', 'jpg', 'svg', 'gif', 'bmp']
-suportados = ['kde', 'cinnamon', 'gnome', 'mate']
+suportados = ['kde', 'cinnamon', 'ubuntu', 'mate']
 
 def limpa():
     
@@ -104,8 +104,6 @@ def on_b_wall_clicked(button):
         output = output.decode().replace('\n', '')
         if output in suportados:
             if output == suportados[0]:
-                os.system(f'reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d "{path}" /f')
-            elif output == suportados[1]:
                os.system(f'qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript "var Desktops = desktops(); \
                     for (i=0;i<Desktops.length;i++) \
                     Desktops[i].wallpaperPlugin = \"org.kde.image\"; \
@@ -113,9 +111,9 @@ def on_b_wall_clicked(button):
                     Desktops[i].currentConfigGroup = Array(\"Wallpaper\", \"org.kde.image\", \"General\"); \
                     for (i=0;i<Desktops.length;i++) \
                     Desktops[i].writeConfig(\"Image\", \"file://{path}\")"')
-            elif output == suportados[2]:
+            elif output == suportados[1]:
                 os.system(f'gsettings set org.cinnamon.desktop.background picture-uri "file://{path}"')
-            elif output == suportados[3]:
+            elif output == suportados[2]:
                 os.system(f'gsettings set org.gnome.desktop.background picture-uri "file://{path}"')
             else:
                 os.system(f'gsettings set org.mate.background picture-filename "{path}"')
