@@ -33,7 +33,7 @@ def notificaFalha(falha):
     os.system("paplay ./assets/audios/falha.ogg")
 
 def notificaTroca():
-    os.system(f"notify-send -i info 'Sucesso' 'Seu wallpaper novo já está pronto!'")
+    os.system(f"notify-send -i info 'Sucesso' 'Seu wallpaper novo já está pronto.'")
     os.system("paplay ./assets/audios/wallpaperModificado.ogg")
 
 def on_b_baixar_clicked(button):
@@ -71,7 +71,15 @@ def on_b_baixar_clicked(button):
                         file.write(response.content)
                         
                     caminho = pathOriginal
-            
+                    img = builder.get_object("img")
+                    pixbuf = GdkPixbuf.Pixbuf.new_from_file(os.path.join(pathOriginal, nomeArq))
+                    
+                    largura = (int(pixbuf.get_width() * 360) / pixbuf.get_height())
+                    pixbuf = pixbuf.scale_simple(largura, 360, GdkPixbuf.InterpType.BILINEAR)
+                    
+                    img.set_from_pixbuf(pixbuf)
+
+                    
                     notificaSucesso(os.path.join(pathOriginal, nomeArq))
                     botao_wall = builder.get_object("b_wall")
                     botao_wall.set_sensitive(True) # deixa ele clicavel novamente
@@ -120,7 +128,7 @@ def on_b_wall_clicked(button):
 def on_b_sobre_clicked(button):
     janela_sobre = Gtk.Window()
     janela_sobre.set_title("Sobre")
-    janela_sobre.set_default_size(300, 200)
+    janela_sobre.set_default_size(300, 400)
     janela_sobre.set_resizable(False) 
 
     box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
@@ -143,6 +151,7 @@ def on_b_sobre_clicked(button):
     
     janela_sobre.add(box)
     janela_sobre.set_position(Gtk.WindowPosition.CENTER)
+    
 
     janela_sobre.show_all()
 

@@ -2,6 +2,21 @@
 <!-- Generated with glade 3.38.2 -->
 <interface>
   <requires lib="gtk+" version="3.24"/>
+  <object class="GtkImage" id="image1">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="pixbuf">assets/icons/go-down.svg</property>
+  </object>
+  <object class="GtkImage" id="image2">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="pixbuf">assets/icons/go-home.svg</property>
+  </object>
+  <object class="GtkImage" id="image3">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="pixbuf">assets/icons/help-info.svg</property>
+  </object>
   <object class="GtkWindow" id="janela">
     <property name="can-focus">False</property>
     <property name="resizable">False</property>
@@ -28,7 +43,7 @@
                 <property name="margin-left">5</property>
                 <property name="label" translatable="yes">Baixar</property>
                 <property name="use-underline">True</property>
-                <property name="stock-id">gtk-go-down</property>
+                <property name="icon-widget">image1</property>
                 <signal name="clicked" handler="on_b_baixar_clicked" swapped="no"/>
               </object>
               <packing>
@@ -42,7 +57,7 @@
                 <property name="can-focus">False</property>
                 <property name="label" translatable="yes">Definir como wallpaper</property>
                 <property name="use-underline">True</property>
-                <property name="stock-id">gtk-home</property>
+                <property name="icon-widget">image2</property>
                 <signal name="clicked" handler="on_b_wall_clicked" swapped="no"/>
               </object>
               <packing>
@@ -56,7 +71,7 @@
                 <property name="can-focus">False</property>
                 <property name="label" translatable="yes">Sobre</property>
                 <property name="use-underline">True</property>
-                <property name="stock-id">gtk-info</property>
+                <property name="icon-widget">image3</property>
                 <signal name="clicked" handler="on_b_sobre_clicked" swapped="no"/>
               </object>
               <packing>
@@ -108,7 +123,18 @@
           </packing>
         </child>
         <child>
-          <placeholder/>
+          <object class="GtkImage" id="img">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="margin-start">20</property>
+            <property name="margin-end">20</property>
+            <property name="margin-bottom">10</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">3</property>
+          </packing>
         </child>
       </object>
     </child>
